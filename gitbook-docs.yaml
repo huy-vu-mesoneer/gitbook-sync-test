@@ -1,0 +1,11 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: Git Sync test
+  structure:
+    - type: space
+      key: space-docs
+      title: Git Sync test
+      path: docs
+      default: true
+      content:
+        directory: ./
