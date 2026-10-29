@@ -2,10 +2,29 @@ $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
   title: Git Sync test
   structure:
-    - type: space
-      key: space-docs
+    - type: section
+      key: section-1
       title: Git Sync test
-      path: docs
+      path: git-sync-test
       default: true
-      content:
-        directory: ./
+      children:
+        - type: space
+          key: space-docs
+          title: Git Sync test
+          path: docs
+          default: true
+          content:
+            directory: ./
+    - type: section
+      key: section-2
+      title: Landing Page
+      path: landing-page
+      children:
+        - type: space
+          key: space-1
+          title: Landing Page
+          path: landing-page
+          default: true
+          draft: true
+          content:
+            directory: ./landing-page
