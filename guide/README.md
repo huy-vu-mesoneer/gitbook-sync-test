@@ -1,3 +1,3 @@
 # Guide
 
-Start with [Getting started](getting-started.md), then read [Advanced](advanced.md).
+Start with [Getting started](getting-started/), then read [Advanced](advanced.md).
