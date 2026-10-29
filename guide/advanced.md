@@ -1,6 +1,6 @@
 # Advanced
 
-## Section Alpha
+## Section Beta
 
 Details about alpha.
 
