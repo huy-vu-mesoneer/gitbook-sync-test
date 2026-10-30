@@ -1,0 +1,39 @@
+name: GitBook link check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gitbook-link-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links and OpenAPI blocks
+        shell: bash
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          set +e
+          node .github/scripts/check-gitbook-links.mjs . 2> report.txt
+          status=$?
+          cat report.txt
+          sed 's/%/%25/g' report.txt | sed -nE 's#^([^:]+):([0-9]+): (.*)$#::error file=\1,line=\2::\3#p'
+          {
+            echo "### GitBook link check"
+            echo "Commit \`${GITHUB_SHA::7}\`: ${COMMIT_MESSAGE%%$'\n'*}"
+            echo '```'
+            cat report.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
