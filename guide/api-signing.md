@@ -1,6 +1,6 @@
 # API signing
 
-{% openapi src="../.gitbook/assets/api-signing.yaml" path="/{tenantId}/document-basket" method="post" %}
+{% openapi src="../.gitbook/assets/api-signing.yaml" path="/{tenantId}/document-baskets" method="post" %}
 [api-signing.yaml](../.gitbook/assets/api-signing.yaml)
 {% endopenapi %}
 
