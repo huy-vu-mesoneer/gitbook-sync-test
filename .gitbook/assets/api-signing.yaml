@@ -1,0 +1,56 @@
+openapi: 3.0.1
+info:
+  title: Signing API (test)
+  version: 1.0.0
+servers:
+  - url: https://api.example.test
+paths:
+  /{tenantId}/document-baskets:
+    post:
+      summary: Create a document basket
+      operationId: createDocumentBasket
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+  /{tenantId}/document-baskets/{documentBasketId}:
+    get:
+      summary: Get a document basket
+      operationId: getDocumentBasket
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: documentBasketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /{tenantId}/document-baskets/{documentBasketId}/revoke:
+    put:
+      summary: Revoke a document basket
+      operationId: revokeDocumentBasket
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: documentBasketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Revoked
