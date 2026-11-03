@@ -5,8 +5,9 @@
 // opening the page at the top, without any error.
 //
 // Checked: relative links and images, with and without an #anchor, in Markdown and in HTML
-// href/src attributes. Also reported: absolute app.gitbook.com/o/... editor links, which go stale
-// when the space is restructured, and {% openapi %} blocks whose path + method is missing from the
+// href/src attributes. Also reported: app.gitbook.com/o/<org>/sites/... editor URLs pasted as links,
+// which go stale when the site is restructured (links to another space, app.gitbook.com/s/... and
+// app.gitbook.com/o/<org>/s/..., are not linted), and {% openapi %} blocks whose path + method is missing from the
 // referenced spec, or that use a hosted spec instead of a file. Other external URLs and
 // root-relative paths are out of scope.
 //
@@ -18,7 +19,7 @@ import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const EXTERNAL = /^([a-z][a-z0-9+.-]*:|\/\/|\/)/i;
-const GITBOOK_EDITOR_URL = /^https?:\/\/app\.gitbook\.com\/o\//i;
+const GITBOOK_EDITOR_URL = /^https?:\/\/app\.gitbook\.com\/o\/[^/]+\/sites\//i;
 
 // Calibrated against the anchors GitBook generated for this repo's headings and against the ids on
 // the published sites: accents are stripped, dots survive, "&" becomes "and", "/" and repeated
@@ -199,7 +200,7 @@ export function checkFiles(files) {
     }
     for (const { line, target } of extractLinks(text)) {
       if (GITBOOK_EDITOR_URL.test(target)) {
-        problems.push({ file, line, target, reason: 'absolute GitBook editor link, use a relative link' });
+        problems.push({ file, line, target, reason: 'GitBook editor URL, use the public docs URL or a cross-space link' });
         continue;
       }
       if (EXTERNAL.test(target)) continue;

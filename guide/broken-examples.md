@@ -14,9 +14,9 @@ See the [Setup guide](setup-guide.md) for the installation steps.
 
 Jump to [Section Alpha](advanced.md#section-alpha).
 
-## 4. Absolute GitBook editor link
+## 4. GitBook editor URL pasted as a link
 
-Edit this page in [the GitBook editor](https://app.gitbook.com/o/example-org/s/example-space/page).
+Edit this page in [the GitBook editor](https://app.gitbook.com/o/example-org/sites/site_example/s/example-space/page).
 
 ## 5. API reference block with a path that is not in the spec
 
